@@ -7,19 +7,22 @@ namespace RsaSecureToken
     {
         private readonly IProfile _profile;
         private readonly IToken _token;
+        private readonly ILogger _logger;
         //base type and members change to from class to interface
 
         //ctorf + tab or alt + insert key
-        public AuthenticationService(IProfile profile, IToken token)
+        public AuthenticationService(IProfile profile, IToken token, ILogger logger)
         {
             _profile = profile;
             _token = token;
+            _logger = logger;
         }
         //ctor + tab
         public AuthenticationService()
         {
             _profile = new Profile();
             _token = new Token();
+            _logger = new Logger();
         }
 
         public bool IsValid(string account, string password)
@@ -40,8 +43,21 @@ namespace RsaSecureToken
             }
             else
             {
+                _logger.Info($"{account} is not a valid account");
                 return false;
             }
+        }
+    }
+
+    public interface ILogger
+    {
+        void Info(string message);
+    }
+
+    public class Logger : ILogger
+    {
+        public void Info(string message)
+        {
         }
     }
 
@@ -84,7 +100,7 @@ namespace RsaSecureToken
     {
         public string GetRandom(string account)
         {
-            var seed = new Random((int) DateTime.Now.Ticks & 0x0000FFFF);
+            var seed = new Random((int)DateTime.Now.Ticks & 0x0000FFFF);
             var result = seed.Next(0, 999999).ToString("000000");
             Console.WriteLine("randomCode:{0}", result);
 
