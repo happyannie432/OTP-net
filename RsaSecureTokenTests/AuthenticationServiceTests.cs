@@ -41,10 +41,21 @@ namespace RsaSecureTokenTests
         [Test()]
         public void IsLogWhenInvalid()
         {
+            WhenInvalid();
+            ShouldLogInfo("annie");
+        }
+
+        private void WhenInvalid()
+        {
             GivenPassword("annie", "77");
             GivenRandom("000000");
             ShouldBeInValid("annie", "81000000");
-            ShouldLogInfo("annie");
+        }
+
+        [Test()]
+        public void IsNoLogWhenValid()
+        {
+            _logger.DidNotReceiveWithAnyArgs();
         }
 
         private void ShouldLogInfo(string account)
