@@ -7,6 +7,7 @@ using DateTime = System.DateTime;
 
 namespace RsaSecureToken
 {
+    //sealed and static cannot use Extract and override way to do it
     public class Holiday
     {
         public string SayHello()
