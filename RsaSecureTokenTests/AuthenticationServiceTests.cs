@@ -22,7 +22,7 @@ namespace RsaSecureToken.Tests
 
             //always failed
             Assert.IsTrue(actual);
-          
         }
+       
     }
 }
