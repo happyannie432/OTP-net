@@ -22,18 +22,4 @@ namespace RsaSecureToken
         }
     }
 
-    public class HolidayForTest : Holiday
-    {
-        private DateTime _today;
-
-        public void SetToday(DateTime today)
-        {
-            _today = today;
-        }
-
-        protected override DateTime GetToday()
-        {
-            return _today;
-        }
-    }
 }
